@@ -30,9 +30,15 @@ public class Main {
             int max_island_in_i = 0;
             int lenn_island = 1;
             for (int j = 0; j < matrix[i].length - 1; j++) {
-                if (matrix[i][j] == matrix[i][j + 1] && matrix[i][j] == true)
+                if (matrix[i][j] == matrix[i][j + 1] && matrix[i][j] == true) {
                     lenn_island += 1;
-                else if (lenn_island != 1 && (matrix[i][j - 1] == true && matrix[i][j] == true)) {
+                    if (j + 1 == matrix[i].length - 1) {
+                        if (max_island_in_i == 0 || max_island_in_i < lenn_island)
+                            max_island_in_i = lenn_island;
+                        cnt_islant += 1;
+                        lenn_island = 1;
+                    }
+                } else if (lenn_island != 1 && (matrix[i][j - 1] == true && matrix[i][j] == true)) {
                     if (max_island_in_i == 0 || max_island_in_i < lenn_island)
                         max_island_in_i = lenn_island;
                     cnt_islant += 1;
@@ -73,15 +79,6 @@ public class Main {
             }
         }
 
-        // (Временно) Для тест вывода
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++)
-                out.print(matrix[i][j] + " ");
-            out.println();
-        }
-        out.println();
-
-
         for (int i = 0; i < max_island.length; i++)
             out.print(max_island[i] + " ");
         out.printf("\nДлина: %d\n\n", max_len_islant);
@@ -96,5 +93,21 @@ public class Main {
             out.println();
         }
         out.printf("Число островков: %d\n", cnt_islant);
+
+        boolean symmetry_flag = true;
+        int cnt_replace = 0;
+        for (int i = 1; i < (matrix.length / 2); i++) {
+            for (int j = 0; j < i; j++) {
+                if (matrix[i][j] != matrix[matrix.length - 1 - i][matrix[i].length - 1 - j]) {
+                    symmetry_flag = false;
+                    cnt_replace += 1;
+                }
+            }
+        }
+        if (symmetry_flag)
+            out.println("YES");
+        else
+            out.printf("Симметричность: %s\nMin кол-во измениений: %d", "NO", cnt_replace);
+
     }
 }
