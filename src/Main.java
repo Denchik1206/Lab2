@@ -24,7 +24,6 @@ public class Main {
         // Переменная для хранения кол-ва островков (групп соседних true).
         int cnt_islant = 0;
 
-
         // Двумерный массив для хранения кол-ва true и длины max последовательности значений true
         // в каждой строке
         int[][] cnt_true_max_island = new int[matrix.length][2];
@@ -32,7 +31,7 @@ public class Main {
         for (int i = 0; i < matrix.length; i++) {
             // Переменная для подсчета кол-ва true в строке.
             int cnt_true_i = 0;
-            // Проход по каждому значению строки и проверка: является ли это значение true.
+            // Проходим по каждому значению строки и проверяем: является ли это значение true.
             for (int j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == true)
                     cnt_true_i += 1;
@@ -40,21 +39,20 @@ public class Main {
             // Добавление в массив cnt_true_max_island на место 0 кол-ва true в строке i.
             cnt_true_max_island[i][0] = cnt_true_i;
 
-            // Переменные для хранения длины max островка в строке i.
+            // Переменные для хранения длины max островка в строке i и подсчета длины каждого островка в строке i
             int max_island_in_i = 0;
-            // Переменная для подсчета длины каждого островка в строке i.
             int lenn_island = 1;
             // Цикл для прохода по значениям строки i.
             for (int j = 0; j < matrix[i].length - 1; j++) {
                 // Проверка является ли текущее значение и следующее значение true.
                 if (matrix[i][j] == matrix[i][j + 1] && matrix[i][j] == true) {
-                    // Если является, то прибавляем к 1 к длине островка.
+                    // Если является, то прибавляем 1 к длине островка.
                     lenn_island += 1;
                     // Также если мы дошли до конца строки i и последние значения равны true,
                     // то прибавляем к кол-ву островков 1 и объединичиваем значение длины островка.
                     if (j + 1 == matrix[i].length - 1) {
                         // Если длина островка больше длины текущего островка с max длиной, то обновляем его.
-                        if (max_island_in_i == 0 || max_island_in_i < lenn_island)
+                        if (max_island_in_i < lenn_island)
                             max_island_in_i = lenn_island;
                         cnt_islant += 1;
                         lenn_island = 1;
@@ -63,7 +61,7 @@ public class Main {
                 // то прибавляем к кол-ву островков 1 и объединичиваем значение длины островка.
                 } else if (lenn_island != 1 && (matrix[i][j - 1] == true && matrix[i][j] == true)) {
                     // Если длина островка больше длины текущего островка с max длиной, то обновляем его.
-                    if (max_island_in_i == 0 || max_island_in_i < lenn_island)
+                    if (max_island_in_i < lenn_island)
                         max_island_in_i = lenn_island;
                     cnt_islant += 1;
                     lenn_island = 1;
@@ -81,8 +79,8 @@ public class Main {
         }
 
         // Дополнительные массивы для сортировки.
-        boolean[] swap;
-        int[] swap1;
+        boolean[] swap1;
+        int[] swap2;
         // Сортировка массива пузырьком.
         // Смотрим из массива cnt_true_max_island кол-во значений true и кол-во последовательных
         // значений true, и исходя из этих значений сортируем массив matrix. Также не забываем
@@ -92,13 +90,13 @@ public class Main {
                 if (cnt_true_max_island[i + 1][0] > cnt_true_max_island[i][0]
                         || ((cnt_true_max_island[i + 1][0] == cnt_true_max_island[i][0])
                         && (cnt_true_max_island[i + 1][1] > cnt_true_max_island[i][1]))) {
-                    swap = matrix[i];
+                    swap1 = matrix[i];
                     matrix[i] = matrix[i + 1];
-                    matrix[i + 1] = swap;
+                    matrix[i + 1] = swap1;
 
-                    swap1 = cnt_true_max_island[i];
+                    swap2 = cnt_true_max_island[i];
                     cnt_true_max_island[i] = cnt_true_max_island[i + 1];
-                    cnt_true_max_island[i + 1] = swap1;
+                    cnt_true_max_island[i + 1] = swap2;
                 }
             }
         }
@@ -128,8 +126,7 @@ public class Main {
         // Переменная для подсчета min кол-ва изменений.
         int cnt_replace = 0;
         // Проходим по массиву рассматривая 1 и (n - 2) строки, 2 и (n - 2) строки и т.д.
-        // Цикл до половины длины строки, так как дальше мы будем проходить по двум половинкам повторно.
-        for (int i = 1; i < (matrix.length / 2); i++) {
+        for (int i = 1; i < matrix.length; i++) {
             // Также проходимся по элементам строки до главной диагонали с двух сторон, и сравниваем
             // равняется ли 0 элемент в i строке (m - 1) элементу в (n - 1 - i), дальше
             // равняется ли 1 элемент в i строке (m - 2) элементу в (n - 1 - i) и так до главной диагонали.
