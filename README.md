@@ -410,32 +410,32 @@ public class Main {
         false false true true false true true true false true false false false false true false false false true true false false true false false true false false true false true false false false false false false true true false false false false true false true true true true true false false false false true true false true false true false false false true false false true true true false false false false true true true true true true false false true false true false true true true true true true true true false false true true true true true true false false false true false false true false true true true false false false false true true false false false false true false false false false true true false true false false true false false false false true false true true true true false true false true false false true true false true false true true false false true true true true false true false true false false false true true true true false false false true true false true false true true false false true true false false true true true true true true true false true false true false false false false false false false true false true true true true false false true true true true false true true false false true true false false false true false false false true false false true false false true true false true true true false true false false true true true true false true false false true true false true false false false true true false true false true true true false false true true true true true false false false true true true false false false false true true true true false true false false false true false false true false false false true false true false true true false false true true true true true false false true false true false true false true false false true true false true false true true false true true true false false true false true false false true false false true false false false true true false true true false true false false true false false false true false false true true true false false true true
         ```
       
-      - **Output**:
-          ```
-          false true true true true true true true true false false true true true true true true false false false true 
-          Длина: 8
-        
-          - + + + + + + + + - - + + + + + + - - - +
-          + + + + - - + + + + - + + - - + + - - - +
-          + - - + + + - - - - + + + + + + - - + - +
-          - - + + + + + - - - + + + - - - - + + + +
-          + - - + + - + - + + - - + + + + - + - + -
-          + + + + - - + - + - + - + - - + + - + - +
-          + + - + - - + + - + - - - + + - + - + + +
-          - - + + + + - - - + + - + - + + - - + + -
-          - + + + + + + + - + - + - - - - - - - + -
-          - + - + + + + + - - - - + + - + - + - - - 
-          - + + - + - - + - - - - + - + + + + - + -
-          - - - + - - + - - + + - + + + - + - - + +
-          + - + + + - - + - + - - + - - + - - - + +
-          - + + - + - - + - - - + - - + + + - - + +
-          - - + + - + + + - + - - - - + - - - + + -
-          - + - - - + - - + - - - + - + - + + - - +
-          - - + - + + + - - - - + + - - - - + - - - 
-          - + - - + - - + - + - - - - - - + + - - - 
-          Число островков: 44
-          Симметричность: NO
+    - **Output**:
         ```
+        false true true true true true true true true false false true true true true true true false false false true 
+        Длина: 8
+        
+        - + + + + + + + + - - + + + + + + - - - +
+        + + + + - - + + + + - + + - - + + - - - +
+        + - - + + + - - - - + + + + + + - - + - +
+        - - + + + + + - - - + + + - - - - + + + +
+        + - - + + - + - + + - - + + + + - + - + -
+        + + + + - - + - + - + - + - - + + - + - +
+        + + - + - - + + - + - - - + + - + - + + +
+        - - + + + + - - - + + - + - + + - - + + -
+        - + + + + + + + - + - + - - - - - - - + -
+        - + - + + + + + - - - - + + - + - + - - - 
+        - + + - + - - + - - - - + - + + + + - + -
+        - - - + - - + - - + + - + + + - + - - + +
+        + - + + + - - + - + - - + - - + - - - + +
+        - + + - + - - + - - - + - - + + + - - + +
+        - - + + - + + + - + - - - - + - - - + + -
+        - + - - - + - - + - - - + - + - + + - - +
+        - - + - + + + - - - - + + - - - - + - - - 
+        - + - - + - - + - + - - - - - - + + - - - 
+        Число островков: 44
+        Симметричность: NO
+      ```
 
 2. Тест при максимальных размерах массива:
     
