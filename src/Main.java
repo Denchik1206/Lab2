@@ -103,9 +103,13 @@ public class Main {
 
         // Выводим строку с максимальным количеством последовательных значений true,
         // а также длину этой последовательности
-        for (int i = 0; i < max_island.length; i++)
-            out.print(max_island[i] + " ");
-        out.printf("\nДлина: %d\n\n", max_len_islant);
+        if (max_len_islant != 0) {
+            for (int i = 0; i < max_island.length; i++)
+                out.print(max_island[i] + " ");
+            out.printf("\nДлина: %d\n\n", max_len_islant);
+        }
+        else
+            out.println("no such line\n");
 
         // Выводим элементы массива в виде матрицы, заменяя true на символ ’+’, а false на ’-’.
         // Дополнительно выводим число островков (групп соседних true).
