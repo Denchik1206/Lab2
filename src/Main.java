@@ -142,7 +142,7 @@ public class Main {
         // Если указатель симметрии равен true, то выводим "YES", иначе выводим "NO" и минимальное
         // кол-во изменений для достижения симметрии.
         if (symmetry_flag)
-            out.println("YES");
+            out.printf("Симметричность: %s\n", "YES");
         else
             out.printf("Симметричность: %s\nMin кол-во измениений: %d", "NO", cnt_replace);
 

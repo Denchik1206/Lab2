@@ -59,45 +59,46 @@
 
 На вход программа сначала получает два числа N и M (размеры двумерного массива). Так как размеры 
 массива не могут быть отрицательными, то числа должны быть больше нуля. Также, не умаляя общности задачи, 
-будем считать, что максимальный размер двумерного массива составляет 100 * 100, а минимальный 2 * 2. Значит, эти 
+будем считать, что максимальный размер двумерного массива составляет 50 * 50, а минимальный 2 * 2. Значит, эти 
 два числа — целые числа, большие 2 и не превышающие 100.
 
 Далее на вход подаются булевые значения `true` или `false` в количестве N * M. Значит минимальное кол-во значений 
-равно 4, а максимальное 10000.
+равно 4, а максимальное 2500.
 
 |                  | Тип         | min кол-во | max кол-во | min значение | max значение |
 |------------------|-------------|------------|------------|--------------|--------------|
-| N (Число 1)      | Целое число | 1          | 1          | 2            | 100          |
-| M (Число 2)      | Целое число | 1          | 1          | 2            | 100          |
-| Булевые значения | Булевый     | 4          | 10000      | -            | -            |
+| N (Число 1)      | Целое число | 1          | 1          | 2            | 50           |
+| M (Число 2)      | Целое число | 1          | 1          | 2            | 50           |
+| Булевые значения | Булевый     | 4          | 2500       | -            | -            |
 
 #### Данные на выход
 
-Сначала программа должна вывести строку с максимальным количеством м последовательных значений `true`, 
-и длину этой последовательности (L). Максимальная длина этой строки равна 100, а минимальная 2. Минимальное
-значение длины этой последовательности равна 2, а максимальное 100.
+Сначала программа должна вывести строку с максимальным количеством последовательных значений `true`, 
+и длину этой последовательности (L). Максимальная длина этой строки равна 50, а минимальная 2. Минимальное
+значение длины этой последовательности равна 2, а максимальное 50.
 
 Далее нужно вывести элементы массива с замененным `true` и `false` на `+` и `-` и вывести кол-во групп 
-соседних `true` (K). Минимальное кол-во элементов двумерного массива равна 4, а максимальное кол-во равна 10000. 
+соседних `true` (K). Минимальное кол-во элементов двумерного массива равна 4, а максимальное кол-во равна 2500. 
 А минимальное значение кол-ва островков равна 0. Рассчитаем максимальное значение кол-ва. Возьмем самый большой размер двумерного массива
-(100 * 100). Чтобы в строку влезло максимальное кол-во островков нужно, чтобы они состояли только из двух 
-последовательных `true` и между островками был только один `false`. В одну строку влезает 33 таких островка, кол-во 
-таких строк равно 100. Тогда максимальное значение кол-ва групп соседних `true` равна 3300.
+(50 * 50). Чтобы в строку влезло максимальное кол-во островков нужно, чтобы они состояли только из двух 
+последовательных `true` и между островками был только один `false`. В одну строку влезает 17 таких островка 
+(++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++-++), кол-во таких строк равно 50. Тогда максимальное значение 
+кол-ва групп соседних `true` равна 17*50=850.
 
 В конце программа должна вывести результат проверки на симметричность массива относительно главной 
 диагонали (`YES` или `NO`). И если не симметричен, то вывести минимальное кол-во изменений (R). Минимальное
 значение кол-ва изменений равна 1 (если будет 0, то изменения не нужны, и программа должна вывести `YES`),
-а максимальное значение равно ((100 - 1) / 2) * 100 = 4950 (т.к. нужно изменить только одну сторону главной диагонали,
+а максимальное значение равно (((50 - 1) + 0) / 2) * 50 = 1225 (т.к. нужно изменить только одну сторону главной диагонали,
 а кол-во элементов до главной диагонали в каждой строке образуют арифм. прогрессию)
 
 |                    | Тип         | min кол-во | max кол-во | min значение | max значение |
 |--------------------|-------------|------------|------------|--------------|--------------|
-| Строка             | Булевый     | 2          | 100        | -            | -            |
-| L                  | Целое число | 1          | 1          | 2            | 100          |
-| Массив             | Символы     | 4          | 10000      | -            | -            |
-| K                  | Целое число | 1          | 1          | 0            | 3300         |
+| Строка             | Булевый     | 2          | 50         | -            | -            |
+| L                  | Целое число | 1          | 1          | 2            | 50           |
+| Массив             | Символы     | 4          | 2500       | -            | -            |
+| K                  | Целое число | 1          | 1          | 0            | 850          |
 | Результат проверки | Строка      | 1          | 1          | -            | -            |
-| R                  | Целое число | 1          | 1          | 1            | 4950         |
+| R                  | Целое число | 1          | 1          | 1            | 1225         |
 
 ### 2,5. Математическая модель
 
@@ -152,7 +153,7 @@
 ### 3. Выбор структуры данных
 
 * Программа на вход получает два значения N и M (размеры двумерного массива). Поскольку эти значения
-  не превышают 10<sup>2</sup>, для их хранения будем использовать две переменные `n` и `m` типа `int`.
+  не превышают 2<sup>31</sup>, для их хранения будем использовать две переменные `n` и `m` типа `int`.
 
 * Далее нам необходимо создать двумерный массив `matrix` (m1), для хранения значений true или false. Поскольку эти 
   значения являются булевыми, массив будет иметь тип `boolean[][]`.
@@ -163,18 +164,18 @@
 
 * Еще нужны переменные `max_len_islant` (n3) и `cnt_islant` (n4), для хранения длины максимальной последовательности значений true и
   кол-ва островков (групп соседних true) соответственно. Эти переменные будут иметь тип `int`, т.к. максимальное значение 
-  максимальной послед. значений true может достигать 100 (если массив имеет размеры X x 100 и все значения в строке равны true),
-  а максимальное кол-во островков равно 3300 (выяснили это выше). Оба этих значения не превышают 2<sup>31</sup>.
+  максимальной послед. значений true может достигать 50 (если массив имеет размеры X x 50 и все значения в строке равны true),
+  а максимальное кол-во островков равно 850 (выяснили это выше). Оба этих значения не превышают 2<sup>31</sup>.
 
 * Также необходим двумерный массив `cnt_true_max_island` (m3), который будет хранить кол-во true и длину максимальной последовательности 
   значений true в каждой строке. Поскольку оба этих значения — целые числа, не превышающие 2<sup>31</sup> (max кол-во true 
-  и длина max последовательности значений true в строке равно 100), массив будет иметь тип `int[][]`.
+  и длина max последовательности значений true в строке равно 50), массив будет иметь тип `int[][]`.
 
 * Еще будет использоваться переменная `cnt_true_i` (n5) для подсчета кол-ва true. Максимальное кол-во true в строке 
   составляет 100, что меньше 2<sup>31</sup>, поэтому переменная будет иметь тип `int`.
 
 * Будем использовать еще две переменные `max_island_in_i` (n6) и `lenn_island` (n7), для временного хранения длины max островка 
-  в строке i и подсчета длины каждого островка в строке i. Максимальное значение обеих переменных равно 100. 
+  в строке i и подсчета длины каждого островка в строке i. Максимальное значение обеих переменных равно 50. 
   Будем использовать переменные типа `int`.
 
 * Также потребуются два массива `swap1` (m4) и `swap2` (m5). Оба нужны для временного хранения строки во время сортировки массивов.
@@ -184,7 +185,7 @@
 * Далее во время проверки на симметрию будет использоваться переменная `symmetry_flag`, которая может принимать
   значения true или false. Эта переменная будет иметь тип `boolean`.
 
-* Еще переменная `cnt_replace` (n8) для подсчета минимального кол-ва изменений. Максимальное значение переменной равно 9900,
+* Еще переменная `cnt_replace` (n8) для подсчета минимального кол-ва изменений. Максимальное значение переменной равно 1225,
   что меньше 2<sup>31</sup>, поэтому она будет иметь тип `int`.
 
 |             | название переменной   | Тип (в Java)  |
@@ -299,8 +300,8 @@ public class Main {
                         cnt_islant += 1;
                         lenn_island = 1;
                     }
-                // Иначе если предыдущий элемент и нынешний элемент равны true, а следующий не равен true,
-                // то прибавляем к кол-ву островков 1 и объединичиваем значение длины островка.
+                    // Иначе если предыдущий элемент и нынешний элемент равны true, а следующий не равен true,
+                    // то прибавляем к кол-ву островков 1 и объединичиваем значение длины островка.
                 } else if (lenn_island != 1 && (matrix[i][j - 1] == true && matrix[i][j] == true)) {
                     // Если длина островка больше длины текущего островка с max длиной, то обновляем его.
                     if (max_island_in_i < lenn_island)
@@ -384,7 +385,7 @@ public class Main {
         // Если указатель симметрии равен true, то выводим "YES", иначе выводим "NO" и минимальное
         // кол-во изменений для достижения симметрии.
         if (symmetry_flag)
-            out.println("YES");
+            out.printf("Симметричность: %s\n", "YES");
         else
             out.printf("Симметричность: %s\nMin кол-во измениений: %d", "NO", cnt_replace);
 
@@ -394,3 +395,397 @@ public class Main {
 
 ### 6. Анализ правильности решения
 
+1. Тесты при обычных размерах массива:
+    - **Input**:
+         ```
+        18
+        21
+        false false true true false true true true false true false false false false true false false false true true false false true false false true false false true false true false false false false false false true true false false false false true false true true true true true false false false false true true false true false true false false false true false false true true true false false false false true true true true true true false false true false true false true true true true true true true true false false true true true true true true false false false true false false true false true true true false false false false true true false false false false true false false false false true true false true false false true false false false false true false true true true true false true false true false false true true false true false true true false false true true true true false true false true false false false true true true true false false false true true false true false true true false false true true false false true true true true true true true false true false true false false false false false false false true false true true true true false false true true true true false true true false false true true false false false true false false false true false false true false false true true false true true true false true false false true true true true false true false false true true false true false false false true true false true false true true true false false true true true true true false false false true true true false false false false true true true true false true false false false true false false true false false false true false true false true true false false true true true true true false false true false true false true false true false false true true false true false true true false true true true false false true false true false false true false false true false false false true true false true true false true false false true false false false true false false true true true false false true true
+        ```
+      
+      - **Output**:
+          ```
+          false true true true true true true true true false false true true true true true true false false false true 
+          Длина: 8
+        
+          - + + + + + + + + - - + + + + + + - - - +
+          + + + + - - + + + + - + + - - + + - - - +
+          + - - + + + - - - - + + + + + + - - + - +
+          - - + + + + + - - - + + + - - - - + + + +
+          + - - + + - + - + + - - + + + + - + - + -
+          + + + + - - + - + - + - + - - + + - + - +
+          + + - + - - + + - + - - - + + - + - + + +
+          - - + + + + - - - + + - + - + + - - + + -
+          - + + + + + + + - + - + - - - - - - - + -
+          - + - + + + + + - - - - + + - + - + - - - 
+          - + + - + - - + - - - - + - + + + + - + -
+          - - - + - - + - - + + - + + + - + - - + +
+          + - + + + - - + - + - - + - - + - - - + +
+          - + + - + - - + - - - + - - + + + - - + +
+          - - + + - + + + - + - - - - + - - - + + -
+          - + - - - + - - + - - - + - + - + + - - +
+          - - + - + + + - - - - + + - - - - + - - - 
+          - + - - + - - + - + - - - - - - + + - - - 
+          Число островков: 44
+          Симметричность: NO
+          Min кол-во измениений: 78
+        ```
+
+2. Тест при максимальных размерах массива:
+    
+    - **Input**:
+        ```
+      50
+      50
+      false true false false true false true true true false true false true false false false true false true false true false true true false false false true true false true false true true true false true false false true false false true false false true false false false true false true true true true true false false true true true true false true true false false false false false false false true false true false false true false false true true true true false true true false true true true true true true false true true false false false true true true true true false true false false true false true false false true false true true true true false false false true false true true false false true false false true false false false false true false false false true false false false false true true false false false false false true true false true false false true false true false false true false true true false false true true true true true false true false true true false false true false false false false true true true true true true true true false false false true false false true false true true false false true false false false true true true false false false false false true false false false true false true false false true false false false false true true true false true true false false true false true true false true false true true true false true false true false true false false true false false false false false false true false false false true false false false false true false true false true false true false false true true false true true true false false false false false false true false true false true true true false false true false true true true true true true false true true true false true true false true true false true false true true true false false true false false false true true true false false true true false true false false false true false true false false false false false false true true true true true false true true false false false false false false true false true false true false false true true true false false false false false true true true false true false false false true false true true false true false false true false false false false false true true true true true false false true true true false true false false false false true false false true false false true true true true true true false false false true true true true true false true true false false true true true true false true true false true false false true true false false false true false true false false true false true false false true true true false false false true true false false false true false false true true true false false true true true false true true false false false true true false false true true true false true true true false false true true false false false true false false true false true true false true false true false true true false true true true false false false false false false true true true true true false true true false false true false true true true false true true false false true true true true false false false false true false false false false false true true true true false true false false true false true true false true true false true true true true false true false true false true false false false false false false false true true false false false true false false false true true true false true true false true false true true true false true true false false true true false false false false true false false true false false true false true false false true true false true true true true true false true false true true true true true true false true true false true false false true true true false true false false false true false false false true false true false true true true false false false true true true true true true true true false true true false false false false true false true true true false false false true false false false false false false true true true true false false true false true true true true true true false true true true true true false false true true true true true false false true true true true false true true false false false true true false true true true false true true true false true false false false false false true false true true false true false true true true false true true true true false true true false false true true false true false true false false true false false true false true true true false false false true true false false true true false false false true false true false false true true true true true false false false true true false false false true false true true true false false true false false true false true true false false true true true false true false true false true true true true false false false false false false true true true false true false false true true true true true true true true false false false false false true true true true true false false true true true false true false true true true true true true false true true false true false true true false true true false false true true true true false false false false true true false true false false false false true true true false true false false true false false true false false true true false false false true false true true true true true true false false true false false true true true true true true false true true true false false true false false true false true true false false false true true false true false false false false false true false true false false true false false true false false false false false false false false false false true true true false false true false false false true true false false false false true true true false true false false true false true false false false false false true true false false false false false true true true false false true false false true false true false false false true false true true false true false false false true true false true false true false true false true false true false false false true true false true true false false false true true true false false true false true false true false false false true true false false false true false true false false false true true true false true false true false false true false true true true true false true true false false false false true false true true false true false true false false true true false false true true true false false true true false true true true true true false true false false false true true true true true true true false false true false false false false true true false false true false true true true true true false true true false false true false true false true true false true true false true true true false true false true false true false false false false false false false false false true false true false true false true false false true true false true true true false true false false true true true false false true false true true false false false true true true false false false true true false true false true true false true false false false true false true false true true true false false true false false false false true false true true true false true false true true true true false false false false false true true true true false true true true true true false false true false false true true true false false false true true false true true false false false false false true false true false false true true true true true false false true false false true true true true true false false true false false true true false false false true false true true true false false false false false true false false true true false true false false true true true false true true true false false false false false false true true true true false false true false true true true false false true true false true false true false true true false false false true false true false true false false true true false true true false false true false false false true true true true true false false false false false true true false true true false true false false false false true false false true false false false true true true true true false true true false true false false false true true true false true false true false false true false true true true true false false true true true false true false true false true false true true false true false false true true true true false false false false true false true false true true true true false false false true true true false true false true true false false false true true false false false true false true false true true true true true true false false true true false true true false true true false true false false true true false true true true true true true true true false false false true true true true true true true true false false true false false true false true false true false true true true true false false true false true false false true false false false true false true true true true true false false false true false false true true false false false true false true true true true false false false true true false false false true true false true true true true true true true false false true false false false false false true false false true true true true false true true false false true true false true false false true false false false true true false false true false true false true true true true true false true false true false false true true true false true false false false true false false true false false true true false true false false false false true true false true true false true true false true false false false true true true false false false false false true false false false true false false false true false true true false true false false false true false true true true false false true false true false false false false false true false true true true true false true true true true false true false true true false true true false true false false false true false true false false false true true false true true true false true false false false true true true false true true false true false false true true false false false false true false false true false false false false true true false true true true false false true false true true false false true false false true true true true false false true true true false true true true false true true true true false true false false true false false true true true true false false false true true true true true true true false false true true true true false false false false false true false true true true true true true true false false false true false true true true true false true false false true true false true true true false true false true true false true true true true false false true true true true false true true true false true false false true true true false true true true false false false true true false true false false true true false true true true false true false false false true true false false true true true false false true false true false false true false false false false false true true true true false false true true true true false false false true false true false false true true true false true false true true true true true true true false true false true false true true false false true true true false true false true false true false false true true true false true false true true false true false false false false true true true true true true false true true true true true true false false true true false false true false false false true true true false false false false false false false true true true true false true false true false true false false true false false false true true false true true false false true true true false false true false false true true true true true false false false true true true false false false false false false false false false true false true true true true false true true true false false false false false true true false false true true false true true true true false true true true false false true false false false true false false true false true false false false false true true false false false true false true true false true false false false false true false true true true true false true true false false false false true false true false true true true false false true true false true true true false false false false false true false true true true false true false false true false false false true true true false true true false true false false true true false false false false true true false true false true false false false true false false false false true true true false true true true false false true false false true false true true true true false true false false true true false true true false false true false false true false true true true false false true false true true true true true false false false false false false false false false false false false true true true false true true true false false false false false false true false true false false true true true false true false true true true false true false true true false false true false true true true true false false true false true true true true true false false false false false true true true true false true true false true false false true false false true false false false true false true false true true false true false false true true false false true false true false false true true true false false false true false true false false false false false false false false
+      ```
+      
+    - **Output**:
+        ```
+      false false false true true false true false false true false true false false true false true true false false true true true true true false true false true true false false true false false false false true true true true true true true true false false false true false 
+      Длина: 8
+            
+      - + + + + + + + - - - + - + + + + - + - - + + - + + + - + - + + - + + + + - - + + + + - + + + - + -
+      + + + + + + + + - + + - - - - + - + + + - - - + - - - - - - + + + + - - + - + + + + + + - + + + + +
+      + + + - - + + + - + + + - + + + + - + - - + - - + + + + - - - + + + + + + + - - + + + + - - - - - +
+      + - - + + - + + + + + + + + - - - + + + + + + + + - - + - - + - + - + - + + + + - - + - + - - + - -
+      + + - - + + + + - - - + - + - - + + + - + - + + + + + + + - + - + - + + - - + + + - + - + - + - - +
+      + + + - - + - + + + + + + - + + + - + + - + + - + - + + + - - + - - - + + + - - + + - + - - - + - +
+      + - - - - - + + + + + - - + + + - + - + + + + + + - + + - + - + + - + + - - + + + + - - - - + + - +
+      - - + + + + + - - + + + + - + + - - - + + - + + + - + + + - + - - - - - + - + + - + - + + + - + + +
+      - + - + + + + - + + - - - - + - + + - + - + - - + + - - + + + - - + + - + + + + + - + - - - + + + +
+      + + + - + + - + - - - + + + - + - + - - + - + + + + - - + + + - + - + - + - + + - + - - + + + + - -
+      - - + - + + + - - + - - + - + + - - + + + - + - + - + + + + - - - - - - + + + - + - - + + + + + + +
+      - + + + + + - - + + + + - + + - - - - - - - + - + - - + - - + + + + - + + - + + + + + + - + + - - - 
+      - + - - + + - + + + + + - + - + + + + + + - + + - + - - + + + - + - - - + - - - + - + - + + + - - - 
+      - - + - + - + + + + - - - + + + - + - + + - - - + + - - - + - + - + + + + + + - - + + - + + - + + -
+      + + - + - + + - + - - - - + + + + + + - + + + + + + - - + + - - + - - - + + + - - - - - - - + + + +
+      + + - - + - + + + - + + - - + + + + - - - - + - - - - - + + + + - + - - + - + + - + + - + + + + - +
+      - + - - - - - + + + + + - - + + + - + - - - - + - - + - - + + + + + + - - - + + + + + - + + - - + +
+      - - - - - + - + - - + + + - + - + + + - + - + + - - + - + + + + - - + - + + + + + - - - - - + + + +
+      - - - + + - + - - + - + - - + - + + - - + + + + + - + - + + - - + - - - - + + + + + + + + - - - + -
+      - + - + + + + + - - - + - - + + - - - + - + + + + - - - + + - - - + + - + + + + + + + - - + - - - - 
+      - - - - + + + - + - - + - - + - - + + - - - + - + + + + + + - - + - - + + + + + + - + + + - - + - -
+      - - + + - - + + + - + + + - - + + - - - + - - + - + + - + - + - + + - + + + - - - - - - + + + + + -
+      + + + - - + - - - - + + - - + - + + + + + - + + - - + - + - + + - + + - + + + - + - + - + - - - - - 
+      - - - + - + - + + + - - + - - - - + - + + + - + - + + + + - - - - - + + + + - + + + + + - - + - - +
+      + + - - - + + - + + - - - - - + - + - - + + + + + - - + - - + + + + + - - + - - + + - - - + - + + +
+      - + - - + + + + - + + - - + + - + - - + - - - + + - - + - + - + + + + + - + - + - - + + + - + - - - 
+      + - + + - - + + - + - + - - + - - + - + + + - - - + + - - + + - - - + - + - - + + + + + - - - + + -
+      - - + - + + + - - + - + - - - - - + - + + + + - + + + + - + - + + - + + - + - - - + - + - - - + + -
+      + + - + - - - - + - + + + + - + + - - - - + - + - + + + - - + + - + + + - - - - - + - + + + - + - -
+      + + - + + - + - - + + - - - + - + - - + - + - - + + + - - - + + - - - + - - + + + - - + + + - + + -
+      - - - - + - + - + - + - - + + - + + + - + - - + + + - - + - + + - - - + + + - - - + + - + - + + - +
+      - + + + - + + + - - - + + - + - - + + - + + + - + - - - + + - - + + + - - + - + - - + - - - - - + +
+      + + - + - - + + - + + - - + - - + - + + + - - + - + + + + + - - - - - - - - - - - - + + + - + + + -
+      - - - - - + - - + + - + - - + + + - + + + - - - - - - + + + + - - + - + + + - - + + - + - + - + + -
+      + + + - + + + - - - - - + + - - + + - + + + + - + + + - - + - - - + - - + - + - - - - + + - - - + -
+      + + + - + - - - + + + - + + - + - - + + - - - - + - - + - - - - + + - + + + - - + - + + - - + - - +
+      + - - - + + + - + + - + - - + + - - - - + + - + - + - - - + - - - - + + + - + + + - - + - - + - + +
+      - + - - + - + + + - + - + - - - + - + - + - + + - - - + + - + - + + + - + - - + - - + - - + - - - +
+      + - + - + - + - - - + + - + + - - - + + + - - + - + - + - - - + + - - - + - + - - - + + + - + - + -
+      + + + + + - + - - + - + - - + - + + + + - - - + - + + - - + - - + - - - - + - - - + - - - - + + - -
+      - - + - + - + - - + + - + + - - + - - - + + + + + - - - - - + + - + + - + - - - - + - - + - - - + +
+      - + - + - + - - + - - - + + - + + - - + + + - - + - - + + + + + - - - + + + - - - - - - - - - + - +
+      - + - + + - - + - - - + + + - - - - - + - - - + - + - - + - - - - + + + - + + - - + - + + - + - + +
+      - - - - - - + + + + + - + + - - - - - - + - + - + - - + + + - - - - - + + + - + - - - + - + + - + -
+      - + - + - - - - - - - + + - - - + - - - + + + - + + - + - + + + - + + - - + + - - - - + - - + - - +
+      + + + - + - - + - + - - - - - + + - - - - - + + + - - + - - + - + - - - + - + + - + - - - + + - + -
+      + - - + - - + + - + - - - - + + - + + - + + - + - - - + + + - - - - - + - - - + - - - + - + + - + -
+      - + + - + - - + - - + - - - + - + - + + - + - - + + - - + - + - - + + + - - - + - + - - - - - - - - 
+      + - + - + - + - - + - - - - - - + - - - + - - - - + - + - + - + - - + + - + + + - - - - - - + - + -
+      + - + + - - - + + - + - - - - - + - + - - + - - + - - - - - - - - - - + + + - - + - - - + + - - - - 
+      Число островков: 314
+      Симметричность: NO
+      Min кол-во измениений: 630
+      ```
+
+3. Тест при минимальных размерах массива:
+
+    - **Input**:
+        ```
+      2
+      2
+      true false true true
+      ```
+
+    - **Output**:
+        ```
+        true true 
+        Длина: 2
+        
+        + +
+        + -
+        Число островков: 1
+        Симметричность: YES
+      ```
+
+4. Тест вывода строки и длины с максимальным кол-вом последовательных значений true:
+    
+    - **Input**:
+        ```
+      21
+      50
+      true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false true false true true false true false true true false true true false true false true true false true false true false false false false false true false false false true false true false false true true false true false false true true false true true true true false false true true false true false true false false false true true true true false true true false true false true false true false false false false false true false true false false true false true true true false false true false true false true true true false false false false false false true false true false true true true false false false true true true true false false true true true true false true false false false true true false false false true false false true true true true false false true true false true false true true false true false true false false false false false true false true true false true false false true false true true false true true false true true false false true false true true true false true true false false true false false false false false true false false true true true true true true true false false false true false true false false true true false false false false true false false false false true false false false false false true false true false true false false false false true true false false true false true false false true false false false false true false true false true true false true true true false false false false true true false true false true false true false false true true false false false false false false true true false false false true true true false false true true true false false true false true false false true false false true true false true false false true true false false false true false true true true true false false false false true true true false true true false false true false true true true true false true true false false true true false false false false false true true false false true false false true false true false true true false true true true true true true false false false true true false true true true false false false true true true false true true true true false true true true true false false false true false false true true true true false true false false false true false true false true true true false true false false false true false true true true true true false true true false true true true false true false true false false true true true true true false false false false true false false false false false true true true false true true true false true false true false false true false true false false false false false true false true true true false true false false false false true true false true false false false false true false false true true false true true true false true true true false true false false false false false true true false false false true true true false true false false false false true false true true true true true true true false true true false true false false true false true true true true true true true true true true true false true true true true true false true true false false true true false false false true false true true true false true true true false false false true false true true false false false false true true false true false false false false false true true false false false true true true true false true true false true false false true false false false true false false false false true false false true false false false true false true true true true true false true true false true false false true true true false true false false false false true false false false false false false false true true false false true false true false true false false false false true false false false false false false true true false true false true true false true false false false true false true false true false true true false true true false false false false true true true true false true false true true false true false true false false false true true false false false true true true false true true true true false false false true true false true false true true true true true false false false false true true true false false false true false false true false true true true false true false true false true true true false true true true true true false true false false false true true false true false true true true false false true false true false false true false false false false false false false false true true true true true true false true false true true true true true true false false true false true true false false false false false false true true false true false false false true true true false false false true false true true true true false true false false false true true true true false true false false false false false false false false false true true true false true false true true false true false false true false false true true false true false false false false false true false true true true true false true false false false true true true true false false true false false false true false false true true true false false true true false false false true true true false true true false false false false false true false true true false true true true true false false true true true true false false true false true false true false false true true true false false true false false false true true false true true true true false
+      ```
+      
+    - **Output**:
+        ```
+      true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true 
+        Длина: 50
+        
+        + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        + - - + - + + + + + + + + + + + - + + + + + - + + - - + + - - - + - + + + - + + + - - - + - + + - -
+        + - - - - - + + - - + - - + - + - + + - + + + + + + - - - + + - + + + - - - + + + - + + + + - + + +
+        + - - - + - - + + + + - + - - - + - + - + + + - + - - - + - + + + + + - + + - + + + - + - + - - + +
+        - - - + + - + - + + + + + - - - - + + + - - - + - - + - + + + - + - + - + + + - + + + + + - + - - - 
+        + - + - - - + - + - + - + + - + + - - - - + + + + - + - + + - + - + - - - + + - - - + + + - + + + +
+        + - + + - - - - - + - + + - + + + + - - + + + + - - + - + - + - - + + + - - + - - - + + - + + + + -
+        - - - + - - + + - + + + - + + + - + - - - - - + + - - - + + + - + - - - - + - + + + + + + + - + + -
+        - + - + - - + - - + + - + - - + + - - - + - + + + + - - - - + + + - + + - - + - + + + + - + + - - +
+        + + - + - + + + - - + - + - - + - - - - - - - - + + + + + + - + - + + + + + + - - + - + + - - - - - 
+        + - - + + - + - + - - - + + + + - + + - + - + - + - - - - - + - + - - + - + + + - - + - + - + + + -
+        - - - - - + - + - + + + - - - + + + + - - + + + + - + - - - + + - - - + - - + + + + - - + + - + - +
+        - + + - + - - - + + + - - - + - + + + + - + - - - + + + + - + - - - - - - - - - + + + - + - + + - +
+        - - - + - + + - + - + + - + + - + - + + - + - + - - - - - + - - - + - + - - + + - + - - + + - + + +
+        - - + - - + + - + - - - - - + - + + + + - + - - - + + + + - - + - - - + - - + + + - - + + - - - + +
+        + - + - + - - - - - + - + + - + - - + - + + - + + - + + - - + - + + + - + + - - + - - - - - + - - +
+        - - + + - + - - - - - + + - - - + + + + - + + - + - - + - - - + - - - - + - - + - - - + - + + + + +
+        - - - - + - + - + + - + + + - - - - + + - + - + - + - - + + - - - - - - + + - - - + + + - - + + + -
+        + + + - - - - + - - - - - + + + - + + + - + - + - - + - + - - - - - + - + + + - + - - - - + + - + -
+        + + + + + + - - - + - + - - + + - - - - + - - - - + - - - - - + - + - + - - - - + + - - + - + - - +
+        - + + - + - - + + + - + - - - - + - - - - - - - + + - - + - + - + - - - - + - - - - - - + + - + - +
+        Число островков: 121
+        Симметричность: NO
+        Min кол-во измениений: 119
+      ```
+
+5. Тест вывода строки и длины с минимальным кол-ва последовательных значений true:
+    
+    - **Input**:
+        ```
+      12
+      13
+      true false false true false false false false true false true false true false true false false false true false false true false true false false true false true false true false true false true false true false true false false true false false false false false true false false true false false false false false true false false true false false true false true false true false true false false true true false false false false false true false false true false true false true false true false true false true false true false true false false false false true false false false true false true false false true false false false false true false false false true false true false true false true false true false false false false false true false false false false true false true false false false true false false false false false true false false false false false true
+      ```
+      
+    - **Output**:
+        ```
+      false true false true false false true true false false false false false 
+        Длина: 2
+        
+        + - + - + - + - + - + - +
+        + - - + - + - + - + - + -
+        + - - + - - - - + - + - +
+        - + - + - + - + - + - - - 
+        - + - + - - + + - - - - - 
+        - + - - - + - - + - + - -
+        - - - - + - - + - - + - +
+        + - + - + - - - - + - - - 
+        + - + - - + - - - - + - -
+        - - + - - - - - + - - + -
+        - - + - - - - + - + - - - 
+        + - - - - - + - - - - - +
+        Число островков: 1
+        Симметричность: NO
+        Min кол-во измениений: 30
+      ```
+            
+6. Тест вывода максимального кол-ва островков в массиве:
+
+    - **Input**:
+        ```
+      50
+      50
+      true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true
+      ```
+      
+    - **Output**:
+        ```
+      true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true 
+        Длина: 2
+        
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        Число островков: 850
+        Симметричность: YES
+      ```
+
+7. Тест вывода минимального кол-ва островков в массиве:
+
+    - **Input**:
+        ```
+      6
+      8
+      false true false false false false false true false true false true false false true false false false true false true false true false true false true false false true false true false true false false false true false false true false false true false false true false
+      ```
+      
+    - **Output**:
+        ```
+      Длина: 0
+
+        + - + - - + - +
+        - + - + - - + -
+        - - + - + - + -
+        + - - + - - + -
+        - + - - - - - +
+        - + - - - + - -
+        Число островков: 0
+        Симметричность: NO
+        Min кол-во измениений: 7
+      ```
+      
+8. Тест проверки на симметрию:
+
+    - **Input**:
+        ```
+      20
+      20
+      true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true
+      ```
+      
+    - **Output**:
+        ```
+      true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true false true true 
+        Длина: 2
+        
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + + - + +
+        Число островков: 340
+        Симметричность: YES
+      ```
+      
+9. Тест проверки на симметрию, когда выводится максимальное кол-во минимальных изменений для достижения симметрии
+
+    - **Input**:
+        ```
+      50
+      50
+      true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true true false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false false true
+      ```
+      
+    - **Output**:
+        ```
+      true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true true 
+        Длина: 50
+        
+        + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + +
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+        Число островков: 49
+        Симметричность: NO
+        Min кол-во измениений: 1225
+      ```
